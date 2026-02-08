@@ -5,22 +5,59 @@ import {
   ArrowRight, Users, Home, Wrench, CheckCircle, XCircle,
   TrendingUp, Shield, Coins
 } from 'lucide-react';
+import gigloLogo from '@/assets/giglo-logo.png';
 import ecosystemImage from '@/assets/business-ecosystem.png';
 import localShopImage from '@/assets/local-shop.png';
+import abstract3D from '@/assets/abstract-3d-pattern.png';
+import localMarketplace from '@/assets/local-marketplace.jpg';
+
+// Floating component
+function Float3D({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  return (
+    <motion.div
+      animate={{ y: [0, -8, 0] }}
+      transition={{ duration: 5, repeat: Infinity, delay }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 // Slide 1: Business Model Overview - The Core Concept
 export function BusinessModelOverviewSlide() {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-6 md:p-12 overflow-hidden">
+    <div className="relative w-full h-full flex flex-col items-center justify-center p-6 md:p-12 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 opacity-10">
+        <img src={abstract3D} alt="" className="w-full h-full object-cover" />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
+      
+      {/* Gradient orbs */}
+      <motion.div 
+        className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/10 rounded-full blur-3xl"
+        animate={{ scale: [1, 1.2, 1] }}
+        transition={{ duration: 6, repeat: Infinity }}
+      />
+
+      {/* Logo */}
+      <motion.img
+        src={gigloLogo}
+        alt=""
+        className="absolute top-6 left-6 w-14 opacity-40"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.4 }}
+      />
+
       <motion.p
-        className="text-sm font-semibold text-primary tracking-widest uppercase mb-2"
+        className="relative z-10 text-sm font-semibold text-primary tracking-widest uppercase mb-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
         Business Model
       </motion.p>
       <motion.h2
-        className="text-xl md:text-3xl font-extrabold text-foreground mb-4 text-center"
+        className="relative z-10 text-xl md:text-3xl font-extrabold text-foreground mb-4 text-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
@@ -28,7 +65,7 @@ export function BusinessModelOverviewSlide() {
         How Giglo Makes Money
       </motion.h2>
       <motion.p
-        className="text-sm md:text-base text-muted-foreground text-center max-w-2xl mb-8"
+        className="relative z-10 text-sm md:text-base text-muted-foreground text-center max-w-2xl mb-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
@@ -37,17 +74,19 @@ export function BusinessModelOverviewSlide() {
       </motion.p>
 
       {/* The Money Flow Diagram */}
-      <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 max-w-4xl w-full">
+      <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 max-w-4xl w-full">
         {/* Consumer */}
         <motion.div
-          className="flex flex-col items-center p-4 md:p-6 rounded-2xl bg-card border border-border shadow-md min-w-[140px]"
+          className="flex flex-col items-center p-4 md:p-6 rounded-2xl bg-gradient-to-br from-blue-500/10 to-blue-500/5 border border-blue-500/20 shadow-lg min-w-[140px] backdrop-blur-sm"
           variants={fadeInLeft}
           initial="hidden"
           animate="show"
         >
-          <div className="w-14 h-14 rounded-full bg-blue-500/10 flex items-center justify-center mb-2">
-            <Home className="w-7 h-7 text-blue-500" />
-          </div>
+          <Float3D delay={0}>
+            <div className="w-14 h-14 rounded-2xl bg-blue-500/15 flex items-center justify-center mb-2 shadow-inner">
+              <Home className="w-7 h-7 text-blue-500" />
+            </div>
+          </Float3D>
           <h4 className="font-bold text-foreground">Consumer</h4>
           <p className="text-xs text-muted-foreground text-center">Pays for service</p>
         </motion.div>
@@ -72,24 +111,32 @@ export function BusinessModelOverviewSlide() {
 
         {/* Giglo Platform */}
         <motion.div
-          className="flex flex-col items-center p-4 md:p-6 rounded-2xl bg-primary/10 border-2 border-primary/30 shadow-lg min-w-[160px]"
+          className="relative flex flex-col items-center p-4 md:p-6 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border-2 border-primary/30 shadow-2xl min-w-[160px] backdrop-blur-sm"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.4, type: 'spring', stiffness: 200 }}
         >
-          <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-2">
-            <Banknote className="w-8 h-8 text-primary" />
-          </div>
-          <h4 className="font-bold text-foreground text-lg">Giglo</h4>
+          {/* Glow */}
           <motion.div 
-            className="text-2xl font-black text-primary"
+            className="absolute inset-0 bg-primary/20 blur-2xl rounded-2xl"
+            animate={{ opacity: [0.3, 0.5, 0.3] }}
+            transition={{ duration: 3, repeat: Infinity }}
+          />
+          <Float3D delay={0.3}>
+            <div className="relative w-16 h-16 rounded-2xl bg-primary/25 flex items-center justify-center mb-2 shadow-inner">
+              <img src={gigloLogo} alt="" className="w-10 h-10" />
+            </div>
+          </Float3D>
+          <h4 className="relative font-bold text-foreground text-lg">Giglo</h4>
+          <motion.div 
+            className="relative text-2xl font-black text-primary"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 1, type: 'spring' }}
           >
             10-18%
           </motion.div>
-          <p className="text-xs text-muted-foreground">Commission</p>
+          <p className="relative text-xs text-muted-foreground">Commission</p>
         </motion.div>
 
         {/* Arrow 2 */}
@@ -112,14 +159,16 @@ export function BusinessModelOverviewSlide() {
 
         {/* Worker */}
         <motion.div
-          className="flex flex-col items-center p-4 md:p-6 rounded-2xl bg-card border border-border shadow-md min-w-[140px]"
+          className="flex flex-col items-center p-4 md:p-6 rounded-2xl bg-gradient-to-br from-green-500/10 to-green-500/5 border border-green-500/20 shadow-lg min-w-[140px] backdrop-blur-sm"
           variants={fadeInRight}
           initial="hidden"
           animate="show"
         >
-          <div className="w-14 h-14 rounded-full bg-green-500/10 flex items-center justify-center mb-2">
-            <Wrench className="w-7 h-7 text-green-500" />
-          </div>
+          <Float3D delay={0.6}>
+            <div className="w-14 h-14 rounded-2xl bg-green-500/15 flex items-center justify-center mb-2 shadow-inner">
+              <Wrench className="w-7 h-7 text-green-500" />
+            </div>
+          </Float3D>
           <h4 className="font-bold text-foreground">Worker</h4>
           <p className="text-xs text-muted-foreground text-center">Receives payment</p>
         </motion.div>
@@ -127,7 +176,7 @@ export function BusinessModelOverviewSlide() {
 
       {/* Key Insight */}
       <motion.div
-        className="mt-8 p-4 rounded-xl bg-muted/50 border border-border max-w-xl"
+        className="relative z-10 mt-8 p-4 rounded-xl bg-muted/50 border border-border max-w-xl backdrop-blur-sm"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.4 }}
@@ -140,15 +189,21 @@ export function BusinessModelOverviewSlide() {
 
       {/* Commission factors */}
       <motion.div
-        className="flex flex-wrap justify-center gap-3 mt-6"
+        className="relative z-10 flex flex-wrap justify-center gap-3 mt-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6 }}
       >
         {['Service Category', 'Urgency Level', 'Location'].map((factor, i) => (
-          <span key={factor} className="text-xs font-medium text-muted-foreground bg-muted px-3 py-1.5 rounded-full">
+          <motion.span 
+            key={factor} 
+            className="text-xs font-medium text-muted-foreground bg-muted/80 px-3 py-1.5 rounded-full border border-border"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 1.7 + i * 0.1 }}
+          >
             {factor}
-          </span>
+          </motion.span>
         ))}
       </motion.div>
     </div>
@@ -163,51 +218,79 @@ export function RevenueStreamsSlide() {
       label: 'Gig Commission', 
       pct: '10-18%',
       desc: 'Per completed service',
-      primary: true
+      primary: true,
+      gradient: 'from-primary/20 to-primary/5'
     },
     { 
       icon: RefreshCw, 
       label: 'Subscriptions', 
       pct: 'Monthly',
-      desc: 'Household cleaning & maintenance plans'
+      desc: 'Household cleaning & maintenance plans',
+      gradient: 'from-blue-500/15 to-blue-500/5'
     },
     { 
       icon: Star, 
       label: 'Worker Boosts', 
       pct: 'Optional',
-      desc: 'Visibility in local searches, priority alerts'
+      desc: 'Visibility in local searches, priority alerts',
+      gradient: 'from-yellow-500/15 to-yellow-500/5'
     },
     { 
       icon: Briefcase, 
       label: 'B2B Contracts', 
       pct: 'High Vol',
-      desc: 'Hostels, PGs, small offices, retail'
+      desc: 'Hostels, PGs, small offices, retail',
+      gradient: 'from-purple-500/15 to-purple-500/5'
     },
     { 
       icon: Zap, 
       label: 'Emergency Premium', 
       pct: '+Fee',
-      desc: 'Late-night, urgent, breakdown assistance'
+      desc: 'Late-night, urgent, breakdown assistance',
+      gradient: 'from-red-500/15 to-red-500/5'
     },
     { 
       icon: Store, 
       label: 'Partner Ecosystem', 
       pct: 'Referral',
-      desc: 'Local hardware & tool shop network'
+      desc: 'Local hardware & tool shop network',
+      gradient: 'from-green-500/15 to-green-500/5'
     },
   ];
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-6 md:p-12">
+    <div className="relative w-full h-full flex flex-col items-center justify-center p-6 md:p-12 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 opacity-8">
+        <img src={abstract3D} alt="" className="w-full h-full object-cover" />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
+      
+      {/* Orb */}
+      <motion.div 
+        className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/10 rounded-full blur-3xl"
+        animate={{ scale: [1, 1.2, 1] }}
+        transition={{ duration: 8, repeat: Infinity }}
+      />
+
+      {/* Logo */}
+      <motion.img
+        src={gigloLogo}
+        alt=""
+        className="absolute top-6 left-6 w-14 opacity-40"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.4 }}
+      />
+
       <motion.p
-        className="text-sm font-semibold text-primary tracking-widest uppercase mb-2"
+        className="relative z-10 text-sm font-semibold text-primary tracking-widest uppercase mb-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
         Revenue Streams
       </motion.p>
       <motion.h2
-        className="text-xl md:text-3xl font-extrabold text-foreground mb-8 text-center"
+        className="relative z-10 text-xl md:text-3xl font-extrabold text-foreground mb-8 text-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
@@ -216,48 +299,68 @@ export function RevenueStreamsSlide() {
       </motion.h2>
 
       <motion.div
-        className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl w-full"
+        className="relative z-10 grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl w-full"
         variants={staggerContainer}
         initial="hidden"
         animate="show"
       >
-        {streams.map(({ icon: Icon, label, pct, desc, primary }) => (
-          <motion.div
-            key={label}
-            variants={scaleIn}
-            className={`relative p-5 rounded-2xl text-center transition-all hover:scale-105 ${
-              primary 
-                ? 'bg-primary/15 border-2 border-primary/40 shadow-lg' 
-                : 'bg-card border border-border hover:border-primary/30'
-            }`}
-          >
-            {primary && (
-              <span className="absolute -top-2 left-1/2 -translate-x-1/2 text-[10px] font-bold text-background bg-primary px-2 py-0.5 rounded-full">
-                PRIMARY
-              </span>
-            )}
-            <div className={`w-12 h-12 rounded-full ${primary ? 'bg-primary/25' : 'bg-primary/10'} flex items-center justify-center mx-auto mb-3`}>
-              <Icon className="w-6 h-6 text-primary" />
-            </div>
-            <span className="text-xl md:text-2xl font-black text-primary block mb-1">{pct}</span>
-            <h4 className="font-bold text-foreground text-sm">{label}</h4>
-            <p className="text-xs text-muted-foreground mt-1 leading-tight">{desc}</p>
+        {streams.map(({ icon: Icon, label, pct, desc, primary, gradient }, i) => (
+          <motion.div key={label} variants={scaleIn}>
+            <Float3D delay={i * 0.15}>
+              <div className={`relative p-5 rounded-2xl bg-gradient-to-br ${gradient} text-center transition-all hover:scale-105 hover:shadow-xl ${
+                primary 
+                  ? 'border-2 border-primary/40 shadow-lg' 
+                  : 'border border-border hover:border-primary/30'
+              } backdrop-blur-sm`}>
+                {primary && (
+                  <motion.span 
+                    className="absolute -top-2 left-1/2 -translate-x-1/2 text-[10px] font-bold text-background bg-primary px-2 py-0.5 rounded-full"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.5, type: 'spring' }}
+                  >
+                    PRIMARY
+                  </motion.span>
+                )}
+                <div className={`w-12 h-12 rounded-xl ${primary ? 'bg-primary/25' : 'bg-primary/10'} flex items-center justify-center mx-auto mb-3 shadow-inner`}>
+                  <Icon className="w-6 h-6 text-primary" />
+                </div>
+                <span className="text-xl md:text-2xl font-black text-primary block mb-1">{pct}</span>
+                <h4 className="font-bold text-foreground text-sm">{label}</h4>
+                <p className="text-xs text-muted-foreground mt-1 leading-tight">{desc}</p>
+              </div>
+            </Float3D>
           </motion.div>
         ))}
       </motion.div>
 
       {/* Revenue mix indicator */}
       <motion.div
-        className="mt-8 flex items-center gap-4"
+        className="relative z-10 mt-8 flex items-center gap-4 p-3 rounded-xl bg-muted/50 border border-border backdrop-blur-sm"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
       >
         <span className="text-xs text-muted-foreground">Revenue Mix:</span>
-        <div className="flex h-3 rounded-full overflow-hidden w-48">
-          <div className="bg-primary w-[60%]" title="Commission" />
-          <div className="bg-primary/60 w-[20%]" title="Subscriptions" />
-          <div className="bg-primary/30 w-[20%]" title="Other" />
+        <div className="flex h-3 rounded-full overflow-hidden w-48 shadow-inner">
+          <motion.div 
+            className="bg-primary" 
+            initial={{ width: 0 }}
+            animate={{ width: '60%' }}
+            transition={{ delay: 1.6, duration: 0.8 }}
+          />
+          <motion.div 
+            className="bg-primary/60" 
+            initial={{ width: 0 }}
+            animate={{ width: '20%' }}
+            transition={{ delay: 1.8, duration: 0.6 }}
+          />
+          <motion.div 
+            className="bg-primary/30" 
+            initial={{ width: 0 }}
+            animate={{ width: '20%' }}
+            transition={{ delay: 2, duration: 0.4 }}
+          />
         </div>
         <span className="text-xs text-muted-foreground">Commission-led</span>
       </motion.div>
@@ -281,16 +384,31 @@ export function LocalEcosystemSlide() {
   ];
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-6 md:p-10 overflow-hidden">
+    <div className="relative w-full h-full flex flex-col items-center justify-center p-6 md:p-10 overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0">
+        <img src={localMarketplace} alt="" className="w-full h-full object-cover opacity-15" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/95 to-background/80" />
+      </div>
+
+      {/* Logo */}
+      <motion.img
+        src={gigloLogo}
+        alt=""
+        className="absolute top-6 left-6 w-14 opacity-40"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.4 }}
+      />
+
       <motion.span
-        className="inline-block text-[10px] font-bold text-background bg-primary px-3 py-1 rounded-full mb-2"
+        className="relative z-10 inline-block text-[10px] font-bold text-background bg-primary px-3 py-1 rounded-full mb-2"
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
       >
         KEY DIFFERENTIATOR
       </motion.span>
       <motion.h2
-        className="text-xl md:text-3xl font-extrabold text-foreground mb-2 text-center"
+        className="relative z-10 text-xl md:text-3xl font-extrabold text-foreground mb-2 text-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
@@ -298,7 +416,7 @@ export function LocalEcosystemSlide() {
         Local Hardware Partner Network
       </motion.h2>
       <motion.p
-        className="text-sm text-muted-foreground text-center max-w-xl mb-6"
+        className="relative z-10 text-sm text-muted-foreground text-center max-w-xl mb-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
@@ -306,7 +424,7 @@ export function LocalEcosystemSlide() {
         Giglo partners with 1-2 verified local shops per category per locality — creating a complete service ecosystem.
       </motion.p>
 
-      <div className="flex flex-col md:flex-row items-center gap-6 max-w-5xl w-full">
+      <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 max-w-5xl w-full">
         {/* Left: Image */}
         <motion.div
           className="flex-1 flex justify-center"
@@ -314,18 +432,25 @@ export function LocalEcosystemSlide() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.4 }}
         >
-          <img 
-            src={localShopImage} 
-            alt="Local hardware shop" 
-            className="w-full max-w-xs rounded-2xl shadow-lg border border-border"
-          />
+          <div className="relative">
+            <motion.div 
+              className="absolute inset-0 bg-primary/20 blur-2xl rounded-2xl"
+              animate={{ opacity: [0.3, 0.5, 0.3] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            />
+            <img 
+              src={localShopImage} 
+              alt="Local hardware shop" 
+              className="relative w-full max-w-xs rounded-2xl shadow-2xl border border-border"
+            />
+          </div>
         </motion.div>
 
         {/* Right: Content */}
         <div className="flex-1 space-y-4">
           {/* How it works */}
           <motion.div
-            className="p-4 rounded-xl bg-card border border-border"
+            className="p-4 rounded-xl bg-card/80 border border-border backdrop-blur-sm shadow-lg"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
@@ -346,32 +471,41 @@ export function LocalEcosystemSlide() {
             initial="hidden"
             animate="show"
           >
-            {benefits.map(({ icon: Icon, text }) => (
+            {benefits.map(({ icon: Icon, text }, i) => (
               <motion.div
                 key={text}
                 variants={fadeInUp}
-                className="flex items-center gap-2 p-2 rounded-lg bg-primary/5"
               >
-                <Icon className="w-4 h-4 text-primary flex-shrink-0" />
-                <span className="text-xs text-foreground">{text}</span>
+                <Float3D delay={i * 0.1}>
+                  <div className="flex items-center gap-2 p-2 rounded-lg bg-primary/5 border border-primary/10 backdrop-blur-sm">
+                    <Icon className="w-4 h-4 text-primary flex-shrink-0" />
+                    <span className="text-xs text-foreground">{text}</span>
+                  </div>
+                </Float3D>
               </motion.div>
             ))}
           </motion.div>
 
           {/* Revenue from this */}
           <motion.div
-            className="p-4 rounded-xl bg-primary/10 border border-primary/20"
+            className="p-4 rounded-xl bg-primary/10 border border-primary/20 backdrop-blur-sm"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1 }}
           >
             <h4 className="font-bold text-foreground mb-2 text-sm">Revenue from Partners:</h4>
             <ul className="space-y-1">
-              {revenue.map((item) => (
-                <li key={item} className="text-xs text-muted-foreground flex items-center gap-2">
+              {revenue.map((item, i) => (
+                <motion.li 
+                  key={item} 
+                  className="text-xs text-muted-foreground flex items-center gap-2"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 1.1 + i * 0.1 }}
+                >
                   <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                   {item}
-                </li>
+                </motion.li>
               ))}
             </ul>
           </motion.div>
@@ -379,7 +513,7 @@ export function LocalEcosystemSlide() {
       </div>
 
       <motion.p
-        className="mt-6 text-sm text-center text-foreground/80 italic max-w-xl"
+        className="relative z-10 mt-6 text-sm text-center text-foreground/80 italic max-w-xl"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.3 }}
@@ -407,16 +541,38 @@ export function AssetLightSlide() {
   ];
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-6 md:p-12">
+    <div className="relative w-full h-full flex flex-col items-center justify-center p-6 md:p-12 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 opacity-10">
+        <img src={abstract3D} alt="" className="w-full h-full object-cover" />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
+      
+      {/* Orbs */}
+      <motion.div 
+        className="absolute top-1/3 right-1/4 w-72 h-72 bg-primary/10 rounded-full blur-3xl"
+        animate={{ scale: [1, 1.3, 1] }}
+        transition={{ duration: 7, repeat: Infinity }}
+      />
+
+      {/* Logo */}
+      <motion.img
+        src={gigloLogo}
+        alt=""
+        className="absolute top-6 left-6 w-14 opacity-40"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.4 }}
+      />
+
       <motion.p
-        className="text-sm font-semibold text-primary tracking-widest uppercase mb-2"
+        className="relative z-10 text-sm font-semibold text-primary tracking-widest uppercase mb-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
         Why We Win
       </motion.p>
       <motion.h2
-        className="text-xl md:text-3xl font-extrabold text-foreground mb-8 text-center"
+        className="relative z-10 text-xl md:text-3xl font-extrabold text-foreground mb-8 text-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
@@ -424,10 +580,10 @@ export function AssetLightSlide() {
         Asset-Light & Defensible
       </motion.h2>
 
-      <div className="flex flex-col md:flex-row gap-8 max-w-4xl w-full">
+      <div className="relative z-10 flex flex-col md:flex-row gap-8 max-w-4xl w-full">
         {/* What we're NOT doing */}
         <motion.div
-          className="flex-1 p-6 rounded-2xl bg-card border border-border"
+          className="flex-1 p-6 rounded-2xl bg-card/80 border border-border backdrop-blur-sm shadow-lg"
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.4 }}
@@ -471,40 +627,25 @@ export function AssetLightSlide() {
             <Shield className="w-5 h-5 text-primary" />
             Our Competitive Moats
           </h3>
-          {moats.map(({ icon: Icon, label, desc }) => (
-            <motion.div
-              key={label}
-              variants={fadeInUp}
-              className="p-4 rounded-xl bg-primary/10 border border-primary/20"
-            >
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                  <Icon className="w-5 h-5 text-primary" />
+          {moats.map(({ icon: Icon, label, desc }, i) => (
+            <motion.div key={label} variants={fadeInUp}>
+              <Float3D delay={i * 0.2}>
+                <div className="p-4 rounded-xl bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 shadow-md backdrop-blur-sm hover:shadow-lg transition-all">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-primary/15 flex items-center justify-center flex-shrink-0 shadow-inner">
+                      <Icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-foreground text-sm">{label}</h4>
+                      <p className="text-xs text-muted-foreground mt-1">{desc}</p>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-bold text-foreground text-sm">{label}</h4>
-                  <p className="text-xs text-muted-foreground mt-1">{desc}</p>
-                </div>
-              </div>
+              </Float3D>
             </motion.div>
           ))}
         </motion.div>
       </div>
-
-      {/* Final one-liner */}
-      <motion.div
-        className="mt-8 p-4 rounded-xl bg-primary/5 border border-primary/15 max-w-2xl"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5 }}
-      >
-        <p className="text-sm text-center text-foreground">
-          <span className="font-bold text-primary">"</span>
-          Giglo is not just a service marketplace — it's an <span className="font-bold">operating system for India's informal workforce</span>, 
-          integrating demand, labour, and local supply chains.
-          <span className="font-bold text-primary">"</span>
-        </p>
-      </motion.div>
     </div>
   );
 }
