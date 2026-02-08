@@ -3,8 +3,10 @@ import { staggerContainer, fadeInUp, scaleIn, AnimatedCounter } from '../animati
 import { 
   Target, Layers, TrendingUp, Users, PieChart, 
   Wrench, Zap, CheckCircle, Calendar, Rocket, 
-  MessageSquare, Building, Clock, Award, BarChart3
+  MessageSquare, Building, Clock, Award, BarChart3, Linkedin
 } from 'lucide-react';
+import roushanImage from '@/assets/team-roushan.png';
+import aribaImage from '@/assets/team-ariba.jpg';
 
 export function MarketSlide() {
   return (
@@ -271,9 +273,18 @@ export function TractionSlide() {
 
 export function TeamSlide() {
   const team = [
-    { name: 'Founder Name', role: 'CEO & Co-Founder', bg: 'bg-primary/20' },
-    { name: 'Founder Name', role: 'CTO & Co-Founder', bg: 'bg-primary/15' },
-    { name: 'Founder Name', role: 'COO & Co-Founder', bg: 'bg-primary/10' },
+    { 
+      name: 'Md. Roushan Alam', 
+      role: 'CEO & Co-Founder', 
+      image: roushanImage,
+      linkedin: 'https://www.linkedin.com/in/mdroushanalam'
+    },
+    { 
+      name: 'Ariba Irfan', 
+      role: 'Co-Founder & CSO', 
+      image: aribaImage,
+      linkedin: 'https://www.linkedin.com/in/ariba-irfan-483254374'
+    },
   ];
 
   return (
@@ -295,25 +306,47 @@ export function TeamSlide() {
       </motion.h2>
 
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl w-full"
+        className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-2xl w-full"
         variants={staggerContainer}
         initial="hidden"
         animate="show"
       >
-        {team.map(({ name, role, bg }) => (
+        {team.map(({ name, role, image, linkedin }) => (
           <motion.div
-            key={role}
+            key={name}
             variants={scaleIn}
-            className="flex flex-col items-center p-8 rounded-2xl bg-card border border-border shadow-md"
+            className="flex flex-col items-center p-8 rounded-2xl bg-card border border-border shadow-lg hover:shadow-xl transition-shadow"
           >
-            <div className={`w-24 h-24 rounded-full ${bg} flex items-center justify-center mb-4`}>
-              <Users className="w-10 h-10 text-primary" />
+            <div className="relative mb-4">
+              <img 
+                src={image} 
+                alt={name}
+                className="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover border-4 border-primary/20 shadow-md"
+              />
+              <a
+                href={linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute -bottom-1 -right-1 w-10 h-10 rounded-full bg-[#0077B5] flex items-center justify-center shadow-md hover:scale-110 transition-transform"
+                aria-label={`${name}'s LinkedIn`}
+              >
+                <Linkedin className="w-5 h-5 text-white" />
+              </a>
             </div>
-            <h4 className="font-bold text-foreground text-lg">{name}</h4>
+            <h4 className="font-bold text-foreground text-lg text-center">{name}</h4>
             <p className="text-sm text-muted-foreground">{role}</p>
           </motion.div>
         ))}
       </motion.div>
+
+      <motion.p
+        className="mt-10 text-sm text-muted-foreground text-center max-w-lg"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+      >
+        Passionate about empowering India's informal workforce through technology
+      </motion.p>
     </div>
   );
 }
