@@ -7,6 +7,7 @@ import { SolutionSlide, ConsumerFlowSlide, WorkerFlowSlide } from './slides/Solu
 import { CompetitionSlide, DifferentiatorsSlide } from './slides/CompetitiveSlides';
 import { BusinessModelOverviewSlide, RevenueStreamsSlide, LocalEcosystemSlide, AssetLightSlide } from './slides/BusinessModelSlides';
 import { MarketSlide, TractionSlide, TeamSlide, AskSlide } from './slides/PlaceholderSlides';
+import { GigloSocialSlide } from './slides/VisionSlide';
 import { ClosingSlide } from './slides/ClosingSlide';
 import { type ComponentType } from 'react';
 
@@ -29,6 +30,7 @@ const slides: ComponentType[] = [
   TractionSlide,
   TeamSlide,
   AskSlide,
+  GigloSocialSlide,
   ClosingSlide,
 ];
 
