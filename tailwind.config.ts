@@ -47,6 +47,13 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        giglo: {
+          orange: "hsl(var(--giglo-orange))",
+          charcoal: "hsl(var(--giglo-charcoal))",
+          light: "hsl(var(--giglo-light))",
+          warm: "hsl(var(--giglo-warm))",
+          success: "hsl(var(--giglo-success))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
