@@ -5,7 +5,8 @@ import { HeroSlide, HookSlide } from './slides/HeroSlides';
 import { ConsumerProblemSlide, WorkerProblemSlide, CoreGapSlide } from './slides/ProblemSlides';
 import { SolutionSlide, ConsumerFlowSlide, WorkerFlowSlide } from './slides/SolutionSlides';
 import { CompetitionSlide, DifferentiatorsSlide } from './slides/CompetitiveSlides';
-import { MarketSlide, BusinessModelSlide, TractionSlide, TeamSlide, AskSlide } from './slides/PlaceholderSlides';
+import { BusinessModelOverviewSlide, RevenueStreamsSlide, LocalEcosystemSlide, AssetLightSlide } from './slides/BusinessModelSlides';
+import { MarketSlide, TractionSlide, TeamSlide, AskSlide } from './slides/PlaceholderSlides';
 import { ClosingSlide } from './slides/ClosingSlide';
 import { type ComponentType } from 'react';
 
@@ -21,7 +22,10 @@ const slides: ComponentType[] = [
   CompetitionSlide,
   DifferentiatorsSlide,
   MarketSlide,
-  BusinessModelSlide,
+  BusinessModelOverviewSlide,
+  RevenueStreamsSlide,
+  LocalEcosystemSlide,
+  AssetLightSlide,
   TractionSlide,
   TeamSlide,
   AskSlide,
