@@ -3,58 +3,163 @@ import { staggerContainer, fadeInUp, scaleIn, AnimatedCounter } from '../animati
 import { 
   Target, Layers, TrendingUp, Users, PieChart, 
   Wrench, Zap, CheckCircle, Calendar, Rocket, 
-  MessageSquare, Building, Clock, Award, BarChart3, Linkedin
+  MessageSquare, Building, Clock, Award, BarChart3, Linkedin,
+  Smartphone, CreditCard, Home
 } from 'lucide-react';
 import roushanImage from '@/assets/team-roushan.png';
 import aribaImage from '@/assets/team-ariba.jpg';
 
 export function MarketSlide() {
+  const marketData = [
+    { 
+      size: 300, 
+      label: 'TAM', 
+      value: '₹4-5L Cr', 
+      desc: 'Total Home Services',
+      color: 'bg-primary/10 border-primary/20', 
+      delay: 0.5 
+    },
+    { 
+      size: 210, 
+      label: 'SAM', 
+      value: '₹1.5L Cr', 
+      desc: 'Urban & Semi-Urban',
+      color: 'bg-primary/20 border-primary/30', 
+      delay: 0.8 
+    },
+    { 
+      size: 120, 
+      label: 'SOM', 
+      value: '₹6K-18K Cr', 
+      desc: '3-5 Year Target',
+      color: 'bg-primary/40 border-primary/50', 
+      delay: 1.1 
+    },
+  ];
+
+  const whyNow = [
+    { icon: Smartphone, label: '70%+ smartphone penetration' },
+    { icon: CreditCard, label: 'UPI payments mainstream' },
+    { icon: Users, label: '450M informal workers' },
+    { icon: Home, label: '300M+ households' },
+  ];
+
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center p-8 md:p-16 slide-gradient">
+    <div className="w-full h-full flex flex-col items-center justify-center p-4 md:p-10 overflow-hidden slide-gradient">
       <motion.p
-        className="text-sm font-semibold text-primary tracking-widest uppercase mb-4"
+        className="text-sm font-semibold text-primary tracking-widest uppercase mb-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
         Market Opportunity
       </motion.p>
+      
+      {/* Main Headline */}
       <motion.h2
-        className="text-2xl md:text-4xl font-extrabold text-foreground mb-12"
+        className="text-lg md:text-2xl font-extrabold text-foreground mb-1 text-center max-w-3xl"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        A Massive Untapped Market
+        From Metropolitan Cities to Rural India —{' '}
+        <span className="text-primary">Everyone Is Our Customer</span>
       </motion.h2>
-
-      {/* TAM SAM SOM concentric circles */}
-      <div className="relative flex items-center justify-center">
-        {[
-          { size: 280, label: 'TAM', value: '$XX B', color: 'bg-primary/10 border-primary/20', delay: 0.5 },
-          { size: 200, label: 'SAM', value: '$XX B', color: 'bg-primary/20 border-primary/30', delay: 0.8 },
-          { size: 120, label: 'SOM', value: '$XX B', color: 'bg-primary/40 border-primary/50', delay: 1.1 },
-        ].map(({ size, label, value, color, delay }) => (
-          <motion.div
-            key={label}
-            className={`absolute rounded-full border-2 ${color} flex flex-col items-center justify-center`}
-            style={{ width: size, height: size }}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay, duration: 0.6, type: 'spring' }}
-          >
-            <span className="text-lg font-black text-foreground">{label}</span>
-            <span className="text-sm text-primary font-semibold">{value}</span>
-          </motion.div>
-        ))}
-      </div>
-
       <motion.p
-        className="mt-20 text-muted-foreground italic"
+        className="text-xs md:text-sm text-muted-foreground text-center max-w-xl mb-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.8 }}
+        transition={{ delay: 0.3 }}
       >
-        Market data to be updated
+        95% of India's home services market is still unorganized. A once-in-a-generation opportunity.
+      </motion.p>
+
+      <div className="flex flex-col md:flex-row items-center gap-6 max-w-5xl w-full">
+        {/* Left: TAM SAM SOM circles */}
+        <div className="relative flex items-center justify-center" style={{ width: 320, height: 320 }}>
+          {marketData.map(({ size, label, value, desc, color, delay }) => (
+            <motion.div
+              key={label}
+              className={`absolute rounded-full border-2 ${color} flex flex-col items-center justify-center`}
+              style={{ width: size, height: size }}
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay, duration: 0.6, type: 'spring' }}
+            >
+              <span className="text-xs font-bold text-muted-foreground">{label}</span>
+              <span className="text-lg md:text-xl font-black text-primary">{value}</span>
+              <span className="text-[10px] text-muted-foreground">{desc}</span>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Right: Details */}
+        <div className="flex-1 space-y-4">
+          {/* Market segments */}
+          <motion.div
+            className="p-4 rounded-xl bg-card border border-border"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6 }}
+          >
+            <h4 className="font-bold text-foreground text-sm mb-2">Services We Cover</h4>
+            <div className="flex flex-wrap gap-2">
+              {['House Cleaning', 'Plumbing', 'Electrical', 'Painting', 'Repairs', 'Daily Helpers', 'Emergency Services'].map((service, i) => (
+                <motion.span
+                  key={service}
+                  className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full"
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.8 + i * 0.05 }}
+                >
+                  {service}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Revenue potential */}
+          <motion.div
+            className="p-4 rounded-xl bg-primary/10 border border-primary/20"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.9 }}
+          >
+            <h4 className="font-bold text-foreground text-sm mb-2">Revenue Potential (12-15% commission)</h4>
+            <div className="flex items-center gap-3">
+              <span className="text-2xl md:text-3xl font-black text-primary">₹700-2,500 Cr</span>
+              <span className="text-xs text-muted-foreground">over 3-5 years</span>
+            </div>
+          </motion.div>
+
+          {/* Why Now */}
+          <motion.div
+            className="grid grid-cols-2 gap-2"
+            variants={staggerContainer}
+            initial="hidden"
+            animate="show"
+          >
+            {whyNow.map(({ icon: Icon, label }) => (
+              <motion.div
+                key={label}
+                variants={fadeInUp}
+                className="flex items-center gap-2 p-2 rounded-lg bg-muted/50"
+              >
+                <Icon className="w-4 h-4 text-primary flex-shrink-0" />
+                <span className="text-[10px] text-foreground">{label}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Bottom one-liner */}
+      <motion.p
+        className="mt-5 text-xs md:text-sm text-center text-foreground/80 italic max-w-2xl"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+      >
+        "Giglo is not creating demand — it's <span className="font-bold text-primary">unlocking trapped demand and supply</span>."
       </motion.p>
     </div>
   );
