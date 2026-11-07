@@ -1,73 +1,89 @@
-# Welcome to your Lovable project
+# Giglo — Hyperlocal Service Bridge & Gig Economy Infrastructure 🇮🇳🛠️
 
-## Project info
+<div align="center">
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Marketplace](https://img.shields.io/badge/Platform-Hyperlocal%20Marketplace-brightgreen?style=for-the-badge)](#system-architecture)
+[![UI/UX](https://img.shields.io/badge/Design-Tailwind%20%2B%20Framer-06B6D4?style=for-the-badge)](https://tailwindcss.com/)
 
-## How can I edit this code?
+**A scalable marketplace architecture and operational simulation engine connecting fragmented blue-collar service professionals with hyper-localized regional demand in India.**
 
-There are several ways of editing your application.
+[Marketplace Architecture](#marketplace-architecture) • [Operational Modules](#operational--business-modules) • [Unit Economics](#unit-economics--scaling-model) • [Setup](#local-development)
 
-**Use Lovable**
+</div>
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## ⚡ Overview
 
-**Use your preferred IDE**
+India's informal and semi-formal service economy encompasses over 400 million workers, yet remains fundamentally broken:
+1. **Supply-side vulnerability:** Independent workers face unstandardized pricing, severe payment delays, and zero career mobility.
+2. **Demand-side friction:** Consumers endure opaque pricing, inconsistent service verification, and lack of accountability.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+**Giglo** addresses this through a **two-sided verified marketplace architecture** designed specifically for tier-1, tier-2, and tier-3 Indian urban hubs.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## 🏛️ Marketplace Architecture
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+```
+┌─────────────────────────────────┐                 ┌─────────────────────────────────┐
+│       DEMAND-SIDE PORTAL        │                 │        SUPPLY-SIDE HUB          │
+│   (Consumers / Businesses)      │                 │  (Verified Service Partners)    │
+│                                 │                 │                                 │
+│ • Geolocation Radius Matching   │                 │ • Skill Matrix & ID Validation  │
+│ • Fixed-Price Escrow Checkout   │                 │ • Transparent Payout Telemetry  │
+│ • Real-Time ETA Tracking        │                 │ • Work Order Dispatch Queue     │
+└────────────────┬────────────────┘                 └────────────────▲────────────────┘
+                 │                                                   │
+                 └───────────────────┬───────────────────────────────┘
+                                     │
+                                     ▼
+┌─────────────────────────────────────────────────────────────────────────────────────┐
+│                              GIGLO CORE ROUTING ENGINE                              │
+│                                                                                     │
+│  • Proximity-Based Dispatch (Haversine Spatial Indexing)                            │
+│  • Dynamic Trust Scoring (Completion Rate, Punctuality, Customer CSAT)              │
+│  • Automated Micro-Invoicing & Direct UPI Settlement                                │
+└─────────────────────────────────────────────────────────────────────────────────────┘
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 🔬 Operational & Business Modules
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+* **Problem & Friction Analysis (`ProblemSlides.tsx`):** Rigorous breakdown of customer trust deficits and service provider unbanked realities.
+* **Structural Solution (`SolutionSlides.tsx`):** Standardized service catalogs, guaranteed arrival SLAs, and vetted skill accreditation.
+* **Competitive Moat (`CompetitiveSlides.tsx`):** Benchmarking Giglo against legacy lead-generation portals vs. managed vertical marketplaces.
+* **Monetization Engine (`BusinessModelSlides.tsx`):** Hybrid take-rate commission model combined with partner micro-insurance and tool financing integrations.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React 18, TypeScript, Vite
+- **Visuals & Motion:** Framer Motion animations, Lucide Icons, Radix UI components
+- **Styling:** Tailwind CSS with custom thematic design system
+
+---
+
+## 💻 Local Development
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/mdroushanalam-astra/giglo-india-s-service-bridge.git
+cd giglo-india-s-service-bridge
+
+# 2. Install dependencies
+npm install
+
+# 3. Launch dev environment
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+<div align="center">
+  <sub>Engineered by <a href="https://github.com/mdroushanalam-astra">Md. Roushan Alam</a></sub>
+</div>
