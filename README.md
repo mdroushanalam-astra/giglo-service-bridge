@@ -1,4 +1,4 @@
-# Giglo — Hyperlocal Service Bridge & Gig Economy Infrastructure 🇮🇳🛠️
+# Giglo:  Hyperlocal Service Bridge & Gig Economy Infrastructure 🇮🇳🛠️
 
 <div align="center">
 
